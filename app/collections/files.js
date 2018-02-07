@@ -336,6 +336,7 @@ module.exports = Backbone.Collection.extend({
 
     return {
       "CURRENT_DATETIME": (new Date()).format('Y-m-d H:i O'),
+      "CURRENT_DATE": (new Date()).format('Y-m-d'),
       "CURRENT_USER": user
     };
   }
