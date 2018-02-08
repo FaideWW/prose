@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -96,6 +97,19 @@ gulp.task('templates', function () {
 // Creates `dist` directory if not created and
 // creates `oauth.json`.
 gulp.task('oauth', function () {
+
+  if (!fs.existsSync('./oauth.json')) {
+    const json = {
+      api: 'https://api.github.com',
+      site: 'https://github.com',
+      clientId: process.env.CLIENT_ID,
+      gatekeeperUrl: process.env.GATEKEEPER_URL,
+    };
+
+    console.log('writing new oauth');
+    fs.writeFileSync('./oauth.json', JSON.stringify(json));
+  }
+
   mkdirp(dist);
   return gulp.src('')
     .pipe(
